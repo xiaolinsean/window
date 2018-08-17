@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>page2</title>
+</head>
+<body>
+    <h1>page2</h1>
+    <button id="page3">跳转到page3</button>
+</body>
+<script>
+    var page3 = document.querySelector("#page3");
+
+    page3.addEventListener("click", function (e) {
+        window.location.href = './page3.html';
+    }, false);
+    
+</script>
+</html>

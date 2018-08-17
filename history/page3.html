@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>page3</title>
+</head>
+<body>
+    <h1>page3</h1>
+    <button id="page3-1">跳转到page3-1</button>
+    <button id="page3-2">跳转到page3-2</button>
+    <button id="page4">跳转到page4</button>
+</body>
+<script>
+    var page3_1 = document.querySelector("#page3-1");
+    var page3_2 = document.querySelector("#page3-2");
+    var page4 = document.querySelector("#page4");
+
+    page3_1.addEventListener("click", function (e) {
+        window.history.pushState({ title: "login" },"title","./page3-1.html");
+        // window.location.href = './page3-1.html';
+    }, false);
+
+    page3_2.addEventListener("click", function (e) {
+        window.location.href = './page3-2.html';
+    }, false);
+
+    page4.addEventListener("click", function (e) {
+        window.location.href = './page4.html';
+    }, false);
+
+</script>
+</html>
