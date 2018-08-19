@@ -5,30 +5,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>page3</title>
+    <style>
+     #content{
+         margin-top: 30px;
+         font-size: 16px;
+     }
+    </style>
 </head>
 <body>
     <h1>page3</h1>
     <button id="page3-1">跳转到page3-1</button>
     <button id="page3-2">跳转到page3-2</button>
     <button id="page4">跳转到page4</button>
+    <div id="content">
+        page3默认内容
+    </div>
 </body>
 <script>
+    window.addEventListener("popstate", function (event) {
+        console.log(event);
+        if (event.state) {
+            var state = event.state.contentId;
+            console.log(state);
+        }
+    }, false);
+
     var page3_1 = document.querySelector("#page3-1");
     var page3_2 = document.querySelector("#page3-2");
     var page4 = document.querySelector("#page4");
 
     page3_1.addEventListener("click", function (e) {
-        window.history.pushState({ title: "login" },"title","./page3-1.html");
-        // window.location.href = './page3-1.html';
+        var contentId = e.target.id;
+        changeContent(contentId);
+        window.history.pushState({ content: contentId },"title","./page3.html?content=" + contentId);
     }, false);
 
     page3_2.addEventListener("click", function (e) {
-        window.location.href = './page3-2.html';
+        var contentId = e.target.id;
+        changeContent(contentId);
+        window.history.replaceState({ content: contentId }, "title", "./page3.html?content=" + contentId);
     }, false);
 
     page4.addEventListener("click", function (e) {
         window.location.href = './page4.html';
     }, false);
+
+    function changeContent(contentId) {
+        switch (contentId) {
+            case 'page3-1':
+                 document.querySelector("#content").innerHTML = "page3-1的内容";
+                 break;
+            case 'page3-2':
+                document.querySelector("#content").innerHTML = "page3-1的内容";
+                break;
+            default:
+                document.querySelector("#content").innerHTML = "page3默认内容";
+                 break;
+         }
+    }
 
 </script>
 </html>
