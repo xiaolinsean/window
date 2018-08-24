@@ -22,12 +22,13 @@
     </div>
 </body>
 <script>
+    changeContent();
     window.addEventListener("popstate", function (event) {
         console.log(event);
         if (event.state) {
-            var state = event.state.contentId;
-            console.log(state);
+            console.log(event.state);
         }
+        changeContent();
     }, false);
 
     var page3_1 = document.querySelector("#page3-1");
@@ -36,14 +37,14 @@
 
     page3_1.addEventListener("click", function (e) {
         var contentId = e.target.id;
-        changeContent(contentId);
         window.history.pushState({ content: contentId },"title","./page3.html?content=" + contentId);
+        changeContent();
     }, false);
 
     page3_2.addEventListener("click", function (e) {
         var contentId = e.target.id;
-        changeContent(contentId);
         window.history.replaceState({ content: contentId }, "title", "./page3.html?content=" + contentId);
+        changeContent();
     }, false);
 
     page4.addEventListener("click", function (e) {
@@ -51,18 +52,29 @@
     }, false);
 
     function changeContent(contentId) {
+        var contentId = getQueryString('content');
         switch (contentId) {
             case 'page3-1':
+                 document.title = "page3---" + contentId;
                  document.querySelector("#content").innerHTML = "page3-1的内容";
                  break;
             case 'page3-2':
-                document.querySelector("#content").innerHTML = "page3-1的内容";
+                document.title = "page3---" + contentId;
+                document.querySelector("#content").innerHTML = "page3-2的内容";
                 break;
             default:
+                document.title = "page3";
                 document.querySelector("#content").innerHTML = "page3默认内容";
                  break;
          }
     }
+
+    // 获取URL中参数
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]); return null;
+    } 
 
 </script>
 </html>
